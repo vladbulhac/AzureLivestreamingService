@@ -1,11 +1,18 @@
-# Livestreaming Application
-
-Built with .NET6 on the backend using Azure Media Services v3 APIs, and Angular on the frontend, from the example provided at [Azure-Samples](https://github.com/Azure-Samples/media-services-v3-dotnet/tree/main/Live/LiveEventWithDVR#readme).
-
-#### Required Environment Variables
-
-```
-"environmentVariables": {
+﻿{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:13449",
+      "sslPort": 44319
+    }
+  },
+  "profiles": {
+    "Livestreaming.Presentation": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7057;http://localhost:5057",
+      "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy",
         "AZURE_ACTIVE_DIRECTORY_ClientId": "YOUR_AAD_CLIENTID",
@@ -21,6 +28,14 @@ Built with .NET6 on the backend using Azure Media Services v3 APIs, and Angular 
         "AZURE_STORAGE_AccountName": "YOUR_AS_ACCNAME",
         "AZURE_STORAGE_ContainerName": "YOUR_AS_CONTAINERNAME"
       }
-```
-
-_To test locally copy the key-value pairs from above in the Properties/launchSettings.json file_
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
+      }
+    }
+  }
+}

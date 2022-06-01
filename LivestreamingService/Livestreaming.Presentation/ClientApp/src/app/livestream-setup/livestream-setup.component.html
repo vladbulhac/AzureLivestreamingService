@@ -1,0 +1,58 @@
+<mat-grid-list cols="2" rowHeight="1:1">
+  <mat-grid-tile>
+    <form [formGroup]="setupForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label class="form-label" for="title">Title</label>
+        <input type="text" class="form-control" id="title" formControlName="title" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="description">Description</label>
+        <input type="text" class="form-control" id="description" formControlName="description" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="recording-duration">Recording duration</label>
+        <input type="range" min="1" max="25" value="25" class="form-range" id="recording-duration" formControlName="recording-duration" oninput="this.nextElementSibling.value = this.value + ' hours'" />
+        <output name="recording-duration-value" for="recording-duration">25 hours</output>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="streaming-protocol">Streaming protocol</label>
+        <select name="streaming-protocol" class="form-select" id="streaming-protocol" formControlName="streaming-protocol">
+          <option value="RTMP">RTMP</option>
+          <option value="FragmentedMP4">Smooth streaming/Fragmented MP4</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="encoding-type">Encoding type</label>
+        <select name="encoding-type" class="form-select" id="encoding-type" formControlName="encoding-type">
+          <option value="Standard">Standard 720p</option>
+          <option value="Premium1080p">Premium 1080p</option>
+          <option value="PassthroughBasic">Passthrough Basic</option>
+          <option value="PassthroughStandard">Passthrough Standard</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-dark" [disabled]="!setupForm.valid">
+        Create
+      </button>
+    </form>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+
+    <mat-card class="example-card" *ngIf="setupResult">
+      <mat-card-title>Livestream set up successfully</mat-card-title>
+      <mat-card-content>
+        <h3>See your livestream <a [routerLink]="['/livestreams',setupResult.livestreamId,'status']">status</a></h3>
+      </mat-card-content>
+      <mat-divider inset></mat-divider>
+    </mat-card>
+    <div *ngIf="loadingAction.isLoading">
+      <mat-spinner></mat-spinner>
+      <p>{{loadingAction.message}}</p>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

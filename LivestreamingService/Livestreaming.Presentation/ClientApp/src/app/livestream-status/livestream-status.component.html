@@ -1,0 +1,26 @@
+<div class="d-flex justify-content-around">
+  <mat-card class="example-card align-self-start" *ngIf="livestreamData">
+    <mat-card-header>
+      <mat-card-title>{{livestreamData.title}}</mat-card-title>
+      <mat-card-subtitle>{{livestreamData.status}} on {{livestreamData.date | date:'medium'}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{livestreamData.description}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button button mat-raised-button [disabled]="livestreamData.status !== 'Setup'" (click)="startLivestream(livestreamData.livestreamId)">Start</button>
+      <button mat-raised-button color="accent" (click)="watchVideo(livestreamData.livestreamId)">Watch</button>
+      <button mat-button color="warn" [disabled]="livestreamData.status === 'Saved'" (click)="stopLivestream(livestreamData.livestreamId)">Stop</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <div *ngIf="loadingAction.isLoading">
+    <mat-spinner></mat-spinner>
+    <p>{{loadingAction.message}}</p>
+  </div>
+  <ng-template *ngIf="message.length > 0">
+    <p>{{message}}</p>
+  </ng-template>
+
+  <app-livestream-howto *ngIf="livestreamEndpoints && !loadingAction.isLoading" [ingestUrl]="livestreamEndpoints.ingestUrl"></app-livestream-howto>
+</div>

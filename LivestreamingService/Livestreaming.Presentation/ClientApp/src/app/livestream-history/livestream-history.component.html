@@ -1,0 +1,31 @@
+<mat-grid-list cols="4" rowHeight="4:3" *ngIf="livestreams.length > 0;else message">
+  <ng-container *ngFor="let livestream of livestreams">
+    <mat-grid-tile (click)="watchVideo(livestream.livestreamId)">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{livestream.title}}</mat-card-title>
+          <mat-card-subtitle>{{livestream.status}} on {{livestream.date | date:'medium' }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            {{livestream.description}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="redirectToStatusPage(livestream.livestreamId)">Status</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </ng-container>
+</mat-grid-list>
+
+<ng-template #message>
+  <div *ngIf="messageContent.length > 0;else loading">
+    {{messageContent}}
+  </div>
+
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+    <h3>Fetching data, please wait...</h3>
+  </ng-template>
+</ng-template>

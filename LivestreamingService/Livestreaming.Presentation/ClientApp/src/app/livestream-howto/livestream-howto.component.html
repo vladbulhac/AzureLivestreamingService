@@ -1,0 +1,73 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        OBS
+      </mat-panel-title>
+      <mat-panel-description>
+        Instructions to livestream using OBS.
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>Download <a href="https://obsproject.com/download">HERE</a></p>
+    <h4 *ngIf="ingestUrl">Server: {{ingestUrl}}</h4>
+    <mat-accordion>
+
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Settings
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul>
+          <li>
+            <div>
+              <h3>Step 1: Go to Settings panel on the lower-right side</h3>
+              <img src="https://ccstorage05.blob.core.windows.net/images/obs-step1-gotosettings.png" alt="Image with Settings location in OBS" />
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Step 2: In the beginning, configure your settings using the example below</h3>
+              <img src="https://ccstorage05.blob.core.windows.net/images/obs-step2.png" alt="Image with an example of stream settings in OBS" />
+              <p>Encoder: NVIDIA NVENC or any x264 for AMD graphics cards</p>
+              <p>Rate Control: CBR</p>
+              <p>Bitrate: 2500 Kbps</p>
+              <p>Keyframe interval: 2 seconds</p>
+              <p>Preset: Performance</p>
+              <p>Profile: high</p>
+              <p>GPU: 0</p>
+              <p>Max B-frames: 2</p>
+              <p><i>Experiment with the settings until you find the best ones for your computer.</i></p>
+            </div>
+          </li>
+          <li>
+            <div>
+              <h3>Step 3: Input in the Server field the ingest URL</h3>
+              <h2 *ngIf="ingestUrl">Ingest URL: <b>{{ingestUrl}}</b></h2>
+              <p>Stream Key can be any value.</p>
+              <img src="https://ccstorage05.blob.core.windows.net/images/obs-step3.png" alt="Image with the location of where to paste the ingest URL in OBS" />
+            </div>
+          </li>
+        </ul>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Start livestream
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul>
+          <li>
+            <div>
+              <h3>Step 1: Click on the Start Streaming button</h3>
+              <img src="https://ccstorage05.blob.core.windows.net/images/obs-step4-startlivestream.png" alt="Image with the location of where to paste the ingest URL in OBS" />
+              <p>To end your livestream click on the Stop Streaming button.</p>
+            </div>
+          </li>
+        </ul>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-expansion-panel>
+</mat-accordion>
